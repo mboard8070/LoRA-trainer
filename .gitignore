@@ -55,3 +55,18 @@ cover/
 # Workbench Project Layout
 data/scratch/*
 !data/scratch/.gitkeep
+
+# Virtual environment
+venv/
+
+# Training data and outputs (large files)
+images/
+output/
+models/flux/
+models/llava/
+*.safetensors
+*.zip
+
+# Stillion-specific data
+stillion-images-new/
+stillion-images-new.zip

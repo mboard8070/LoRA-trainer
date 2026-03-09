@@ -1,1 +1,32 @@
 jupyterlab>3.0
+
+# PyTorch (CUDA 13.0 for DGX Spark)
+--extra-index-url https://download.pytorch.org/whl/cu130
+torch
+torchvision
+torchaudio
+
+# FLUX LoRA Training
+diffusers>=0.32.0
+transformers>=4.50.0
+accelerate>=1.0.0
+peft>=0.14.0
+bitsandbytes>=0.45.0
+safetensors>=0.4.0
+datasets
+huggingface_hub
+
+# LLaVA for auto-captioning
+llava-torch
+
+# Image processing
+Pillow>=10.0.0
+opencv-python
+
+# Utilities
+tqdm
+pyyaml
+einops
+sentencepiece
+protobuf
+gradio>=4.0.0
