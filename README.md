@@ -2,6 +2,20 @@
 
 FLUX.1-dev LoRA fine-tuning toolkit with LLaVA auto-captioning and a Gradio web UI. Built for NVIDIA DGX Spark (128GB unified memory, CUDA 13.0) but runs on any system with a supported GPU and sufficient VRAM.
 
+## Case Study
+
+**Problem:** Fine-tuning image-generation styles usually requires separate scripts for captioning, training, checkpoint recovery, and testing outputs. That makes the workflow fragile, especially over SSH on a local GPU workstation.
+
+**What I built:** A DGX Spark-ready FLUX.1-dev LoRA trainer that combines image auto-captioning with LLaVA, LoRA training with PEFT/diffusers, checkpoint resume support, live training status, and a Gradio UI for captioning, training, and generation.
+
+**Architecture:** Training images are captioned into sidecar text files, the training script fine-tunes FLUX.1-dev with LoRA adapters, progress is written to `output/training_status.json`, and the Gradio app polls that status while exposing generation with one or more trained adapters.
+
+**Technical depth:** The trainer uses bf16 mixed precision, gradient checkpointing, AdamW 8-bit, cosine scheduling, configurable LoRA rank, checkpoint saves, resume-from-checkpoint parsing, and multi-LoRA stacking during generation.
+
+**Proof:** The README documents command-line and UI workflows, required hardware, training parameters, output layout, monitoring commands, and the exact target modules used for adapter training.
+
+**Tradeoffs:** FLUX.1-dev produces high-quality style adapters but is gated and memory-heavy, so the project is tuned for Spark-class local hardware while still documenting the GPU and license constraints clearly.
+
 ## What It Does
 
 1. **Auto-Caption** -- Generates training captions from your images using LLaVA 1.5-7B, with optional style descriptions and trigger words
